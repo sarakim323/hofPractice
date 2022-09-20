@@ -247,28 +247,50 @@ var applyCoupon = function (groceries, coupon) {
     salePrice = salePrice.toFixed(2);
     element['salePrice'] = '$' + salePrice;
     return element;
-    // var salePrice = Number(element['price'].slice(1) - (element['price'] * coupon));
-    // salePrice = salePrice.toFixed(2);
-    // element['salePrice'] = '$' + salePrice;
-    // return element;
   });
 };
 
 /*
  *
- *  _.reduce
- *
+ *  _.reduce - the accumulator is whatever the callback function gives as an output
  */
 
 // return the total price of all products.
+// I - array of objects (groceries)
+// O - total price of all products (number)
+// C - use .reduce
+// E -
+// Pseudocode
+  // return reduce
+    // look up price of each product
+    // return the price
 var sumTotal = function (products) {
-
+  return _.reduce(products, function(accumulator, element) {
+    return accumulator + parseFloat(element.price.slice(1));
+  }, 0);
 };
 
 // return an object consisting of dessert types and how many of each.
 // exampleOutput: { dessertType: 3, dessertType2: 1 }
+// I - dessert array of objects
+// O - object consisting of dessert type and how many of each
+// C - use reduce
+// E -
+// Pseudocode
+  // run _reduce()
+    // create a count variable
+    // add 1 to the count variable if the dessertType exists in the accumulator
+    // add object[dessert] = count to the accumulator
+  // return _reduce()
 var dessertCategories = function (desserts) {
-
+  return _.reduce(desserts, function(accumulator, element) {
+    if (accumulator[element.type] === undefined) {
+      accumulator[element.type] = 1;
+    } else {
+      accumulator[element.type] ++;
+    }
+    return accumulator;
+  }, {});
 };
 
 // return an object with the proper count of all user messages
@@ -282,20 +304,62 @@ var dessertCategories = function (desserts) {
     "sharksforcheap": 3
   }
 */
+// I - array of objects
+// O - object with the proper count of all user messages
+// C - use reduce()
+// E -
+// Pseudocode
+  // return reduce()
+    // if accumulator does not include the user (element's key), create a property of the user
+    // with a count value of 1
+    // if it's already included, increase the count value by 1
+    // return the accumulator
 var countMessagesPerUser = function(tweets) {
-
+  return _.reduce(tweets, function(accumulator, element) {
+    if (accumulator[element.user] === undefined) {
+      accumulator[element.user] = 1;
+    } else {
+      accumulator[element.user] ++;
+    }
+    return accumulator;
+  }, {});
 };
 
 // given an array of movie data objects,return an array containing
 // movies that came out between 1990 and 2000.
 // TIP: use an array as your accumulator - don't push to an external array!
+// I - movies array of objects
+// O - an array containing movies that came out between 1990 and 2000
+// C - use _.reduce()
+// E -
+// Pseudocode
+  // return _.reduce()
+    // if release year of movie is between 1990 and 2000, push it into the accumulator array
 var ninetiesKid = function (movies) {
-
+  return _.reduce(movies, function(accumulator, item) {
+    if (item.releaseYear >= 1990 && item.releaseYear <= 2000) {
+      accumulator.push(item.title);
+    }
+    return accumulator;
+  }, []);
 };
 
 // return an boolean stating if there exists a movie with a shorter
 // runtime than your time limit.
 // timeLimit is an integer representing a number of minutes.
+// I - movies array of objects, timelimit
+// O - boolean stating if there exists a movie with a hshorter runtime than timeLimit
+// C - use _reduce()
+// E -
+// Pseudocode
+  // set accumulator equal to false
+  // return _reduce()
+    // if the movie's runtime is shorter than timeLimit, set accumulator equals to true;
 var movieNight = function (movies, timeLimit) {
-
+  return _.reduce(movies, function(accumulator, item) {
+    if (item.runtime < timeLimit) {
+      accumulator = true;
+    }
+    return accumulator;
+  }, false);
 };
