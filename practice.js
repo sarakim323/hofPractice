@@ -24,13 +24,58 @@ var moreFruits = function (fruits) {
 
 // use _.each to traverse the number array and determine
 // which are multiples of five.
+// I - array of numbers
+// O - total number of values that are multiples of five
+// C - use _.each
+// E -
+// Pseudocode
+  // create a resulting variable
+  // iterate over the array
+  // if the number is a multiple of five, add 1 to the resulting variable
+  // return the resulting variable
 var multiplesOfFive = function (numbers) {
-
+  // using _.each()
+  var result = 0;
+  _.each(numbers, function(element) {
+    if (element % 5 === 0) {
+      result++;
+    }
+  });
+  return result;
+  // using _.filter()
+  // var result = _.filter(numbers, function(element) {
+  //   if (element % 5 === 0) {
+  //     return true;
+  //   }
+  // });
+  // return result.length;
 };
 
 // use _.each to build an array containing only tweets belonging to a specified user.
+// I - tweets (array of objects), user (name)
+// O - array containing only tweets belonging to a specified user
+// C - use _.each
+// E -
+// Pseudocode
+  // create a result variable
+  // iterate over the array
+    // if the property "user" matches the user parameter, push the element into the result variable
+  // return the result variable
 var getUserTweets = function(tweets, user) {
-
+  // using _.each()
+  var result = [];
+  _.each(tweets, function(element, index, array) {
+    if (array[index].user === user) {
+      result.push(element);
+    }
+  });
+  return result;
+  // using _.filter()
+  // return _.filter(tweets, function(element, index, array) {
+  //   if (array[index].user === user) {
+  //     return true;
+  //   }
+  // });
 };
 
 /*
@@ -40,24 +85,64 @@ var getUserTweets = function(tweets, user) {
  */
 
 // use _.filter to return the fruits array with only the desired fruit.
+// I - array of fruits, target Fruit string
+// O - array with only the desired fruit
+// C - use _.filter, do not create new array
+// E -
+// Pseudocode
+  // filter the fruit array
+    // if the element matches the targetFruit, return true
+  // return the filter function
 var onlyOneFruit = function (fruits, targetFruit) {
-
+  return _.filter(fruits, function(element) {
+    if (element === targetFruit) {
+      return true;
+    }
+  });
 };
 
 // use _.filter to return the fruits array with only fruits
 // starting with the letter 'P'.
+// I - fruits array, letter (string)
+// O - array with only fruits starting with the given letter
+// C - use _.filter
+// E -
+// Pseudocode
+  // filter the fruit array
+    // if the element matches the letter, return true
+  // return the filter function
 var startsWith = function (fruits, letter) {
-
+  return _.filter(fruits, function(element) {
+    if (element[0] === letter) {
+      return true;
+    }
+  });
 };
 
 // return a filtered array containing only cookie-type desserts.
+// I - dessert array
+// O - array containing only cookie-type desserts
+// C - use _.filter
+// E -
+// Pseudocode
+  // filter the dessert array
+    // if the dessert type is cookie, return true
+  // return the filtered array
 var cookiesOnly = function (desserts) {
-
+  return _.filter(desserts, function(element, index, array) {
+    if (array[index].type === 'cookie') {
+      return true;
+    }
+  });
 };
 
 // rebuild the getUserTweets function from above with _.filter instead
 var filterUserTweets = function(tweets, user) {
-
+  return _.filter(tweets, function(element, index, array) {
+    if (array[index].user === user) {
+      return true;
+    }
+  });
 };
 
 /*
