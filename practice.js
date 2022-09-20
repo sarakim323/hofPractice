@@ -153,21 +153,57 @@ var filterUserTweets = function(tweets, user) {
 
 // given an array of strings, use _.map to return a new array containing all
 // strings converted to uppercase letters.
+// I - fruits array
+// O - new array containing strings converted to uppercase letters
+// C - use _.map
+// E -
+// Pseudocode
+  // use _.map()
+  // convert each element string to uppercase letters
+  // return _.map()
 var upperCaseFruits = function (fruits) {
-
+  return _.map(fruits, function(element) {
+    return element.toUpperCase();
+  });
 };
 
 // given an array of dessert objects, return a new array of objects
 // that have a new "glutenFree" property, with a boolean value.
 // TIP: Items that contain flour are not gluten-free.
+// I - array of dessert objects
+// O - new array of objects that have a new glutenFree property with a boolean value
+// C - use _.map()
+// E -
+// Pseudocode
+  // use _.map
+    // add new glutenFree property with a boolean value to each object element
+      // items that contain flour = false
+  // return _.map
 var glutenFree = function (desserts) {
-
+  return _.map(desserts, function(element, index, array) {
+    if (array[index]['ingredients'].includes('flour')) {
+      array[index]['glutenFree'] = false;
+    } else {
+      array[index]['glutenFree'] = true;
+    }
+    return array[index]; // this is the element that is being put into the new result array
+  });
 };
 
 // given an array of tweet objects, return a new array of strings
 // containing only the message properties.
+// I - array of tweet objects
+// O - new array of strings containing only the message properties
+// C - use _.map
+// E -
+// Pseudocode
+  // use _.map
+    // look up message property for each element
+  // return _.map
 var allUserMessages = function(tweets) {
-
+  return _.map(tweets, function(element) {
+    return element['message'];
+  });
 };
 
 // use _.map to return an array of items with their sale prices, with a new property
@@ -190,8 +226,32 @@ var allUserMessages = function(tweets) {
   ];
 
 */
+// I - groceries (array of objects), coupon (number)
+// O - array of items with sale price property
+// C - round any decimals to 2 places
+// E -
+// Pseudocode
+  // use _.map()
+    // remove dollar sign - first character of the price string
+    // convert price type from string to number
+    // calculate sale price
+    // round the sale price to 2 decimal places
+    // create a new variable and add dollar sign and sale price
+    // add sale price property to each element
+    // return the element
+  // return _.map()
 var applyCoupon = function (groceries, coupon) {
-
+  return _.map(groceries, function(element) {
+    var originalPrice = parseFloat(element['price'].slice(1));
+    var salePrice = originalPrice - (originalPrice * coupon);
+    salePrice = salePrice.toFixed(2);
+    element['salePrice'] = '$' + salePrice;
+    return element;
+    // var salePrice = Number(element['price'].slice(1) - (element['price'] * coupon));
+    // salePrice = salePrice.toFixed(2);
+    // element['salePrice'] = '$' + salePrice;
+    // return element;
+  });
 };
 
 /*
